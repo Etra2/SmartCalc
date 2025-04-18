@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartCalc</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="header">
+    <h1>SmartCalc</h1>
+    <div class="tabs">
+        <a th:href="@{/classic}"><button class="tab" th:classappend="${activeTab == 'classic' ? ' active' : ''}">Kalkulator klasyczny</button></a>
+        <a th:href="@{/scientific}"><button class="tab" th:classappend="${activeTab == 'scientific' ? ' active' : ''}">Kalkulator naukowy</button></a>
+        <a th:href="@{/matrix}"><button class="tab" th:classappend="${activeTab == 'matrix' ? ' active' : ''}">Kalkulator macierzy</button></a>
+        <a th:href="@{/logic}"><button class="tab" th:classappend="${activeTab == 'logic' ? ' active' : ''}">Kalkulator logiki</button></a>
+        <a th:href="@{/ai}"><button class="tab" th:classappend="${activeTab == 'ai' ? ' active' : ''}">Rozwiąż zadanie z AI</button></a>
+    </div>
+</div>
+
+<div class="content">
+    <h2 th:text="${message}">Wczytywanie...</h2>
+</div>
+</body>
+</html>

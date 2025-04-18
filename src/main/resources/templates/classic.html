@@ -12,11 +12,21 @@
 <div class="header">
     <h1>SmartCalc</h1>
     <div class="tabs">
-        <button class="tab" th:classappend="${activeTab == 'classic' ? ' active' : ''}" id="classicCalcTab">Kalkulator klasyczny</button>
-        <button class="tab" th:classappend="${activeTab == 'scientific' ? ' active' : ''}" id="scientificCalcTab">Kalkulator naukowy</button>
-        <button class="tab" th:classappend="${activeTab == 'matrix' ? ' active' : ''}" id="matrixCalcTab">Kalkulator macierzy</button>
-        <button class="tab" th:classappend="${activeTab == 'logic' ? ' active' : ''}" id="logicCalcTab">Kalkulator logiki</button>
-        <button class="tab" th:classappend="${activeTab == 'ai' ? ' active' : ''}" id="solveMathProblemAI">Rozwiąż zadanie z AI</button>
+        <a th:href="@{/classic}">
+            <button class="tab" th:classappend="${activeTab == 'classic' ? ' active' : ''}" id="classicCalcTab">Kalkulator klasyczny</button>
+        </a>
+        <a th:href="@{/scientific}">
+            <button class="tab" th:classappend="${activeTab == 'scientific' ? ' active' : ''}" id="scientificCalcTab">Kalkulator naukowy</button>
+        </a>
+        <a th:href="@{/matrix}">
+            <button class="tab" th:classappend="${activeTab == 'matrix' ? ' active' : ''}" id="matrixCalcTab">Kalkulator macierzy</button>
+        </a>
+        <a th:href="@{/logic}">
+            <button class="tab" th:classappend="${activeTab == 'logic' ? ' active' : ''}" id="logicCalcTab">Kalkulator logiki</button>
+        </a>
+        <a th:href="@{/ai}">
+            <button class="tab" th:classappend="${activeTab == 'ai' ? ' active' : ''}" id="solveMathProblemAI">Rozwiąż zadanie z AI</button>
+        </a>
     </div>
 </div>
 
