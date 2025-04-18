@@ -5,14 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class PlaceholderController {
-
-    @GetMapping("/scientific")
-    public String scientific(Model model) {
-        model.addAttribute("activeTab", "scientific");
-        model.addAttribute("message", "Rozwiązanie w budowie");
-        return "scientific";
-    }
+public class OtherTabsController {
 
     @GetMapping("/matrix")
     public String matrix(Model model) {
