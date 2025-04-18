@@ -1,58 +1,64 @@
+// Funkcja obsługująca przyciski na ekranie
+function addDigit(char) {
+    const input = document.getElementById('expression');
+    input.value += char;
+}
+
+// Funkcja czyszcząca pole wejściowe
+function clearInput() {
+    const input = document.getElementById('expression');
+    input.value = '';
+}
+
+// Całość uruchamiana po załadowaniu strony
 document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('expression');
 
-    // Funkcja obsługująca przyciski na ekranie
-    function addDigit(char) {
-        input.value += char;
-    }
-
-    // Funkcja czyszcząca pole wejściowe
-    function clearInput() {
-        input.value = '';
-    }
-
     // Obsługuje klawisze fizyczne
     document.addEventListener('keydown', (event) => {
-        const allowedKeys = '0123456789+-*/().%'; // Dozwolone znaki
+        const allowedKeys = '0123456789+-*/().%';
 
-        // Obsługuje tylko dozwolone znaki
+        // Dozwolone znaki
         if (allowedKeys.includes(event.key)) {
-            event.preventDefault(); // Zapobiega domyślnym akcjom, takim jak przewijanie strony
-            // Dodajemy znak, ale sprawdzamy, czy nie dodajemy dwóch kropek
+            event.preventDefault();
+
             if (event.key === '.' && !input.value.includes('.')) {
-                input.value += event.key; // Dodajemy tylko jedną kropkę
+                input.value += event.key;
             } else if (event.key !== '.') {
                 input.value += event.key;
             }
         }
 
-        // Zamiana przecinka z klawiatury numerycznej na kropkę
+        // Zamiana przecinka na kropkę
         if (event.key === ',') {
             event.preventDefault();
-            input.value += '.'; // Zamiana przecinka na kropkę
+            input.value += '.';
         }
 
-        // Obsługuje Enter - submit formularza
+        // Enter = oblicz
         if (event.key === 'Enter') {
             event.preventDefault();
             document.querySelector('.calculator-form').submit();
         }
 
-        // Obsługuje Backspace - usuwanie ostatniego znaku
+        // Backspace = usuń ostatni znak
         if (event.key === 'Backspace') {
             event.preventDefault();
-            input.value = input.value.slice(0, -1); // Usuwa ostatni znak
+            input.value = input.value.slice(0, -1);
         }
 
-        // Obsługuje Escape - czyszczenie pola
+        // Escape = wyczyść
         if (event.key === 'Escape') {
             event.preventDefault();
-            clearInput(); // Czyszczenie pola
+            clearInput();
         }
     });
 
-    // Podłączenie przycisku kalkulatora naukowego
-    document.getElementById('scientificCalcTab').addEventListener('click', () => {
-        window.location.href = '/scientific';
-    });
+    // Przycisk przejścia do kalkulatora naukowego
+    const scientificBtn = document.getElementById('scientificCalcTab');
+    if (scientificBtn) {
+        scientificBtn.addEventListener('click', () => {
+            window.location.href = '/scientific';
+        });
+    }
 });
