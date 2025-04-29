@@ -1,7 +1,7 @@
 package com.kalkulator.controller;
 
-import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder;
+import com.kalkulator.parser.ExpressionNode;
+import com.kalkulator.parser.Parser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/scientific")
 public class ScientificCalculatorController {
+
+    private final Parser parser;
+
+    // Konstruktor wstrzykujący parser
+    public ScientificCalculatorController(Parser parser) {
+        this.parser = parser;
+    }
 
     @GetMapping
     public String showScientificCalculator(Model model) {
@@ -22,33 +29,11 @@ public class ScientificCalculatorController {
     public String calculate(@RequestParam String expression, Model model) {
         String result;
         try {
-            // Zamień "pi" i "e" na wartości z exp4j
-            expression = expression.replace("pi", String.valueOf(Math.PI))
-                    .replace("e", String.valueOf(Math.E));
+            // Parsowanie wyrażenia
+            ExpressionNode parsedExpression = parser.parse(expression);
 
-            Expression exp = new ExpressionBuilder(expression)
-                    .functions(
-                            new net.objecthunter.exp4j.function.Function("root", 2) {
-                                @Override
-                                public double apply(double... args) {
-                                    return Math.pow(args[1], 1.0 / args[0]);
-                                }
-                            },
-                            new net.objecthunter.exp4j.function.Function("abs", 1) {
-                                @Override
-                                public double apply(double... args) {
-                                    return Math.abs(args[0]);
-                                }
-                            },
-                            new net.objecthunter.exp4j.function.Function("sinlia", 1) {
-                                @Override
-                                public double apply(double... args) {
-                                    return Math.sin(args[0]) + Math.log(args[0]);
-                                }
-                            }
-                    )
-                    .build();
-            double evaluationResult = exp.evaluate();
+            // Obliczanie wyniku
+            double evaluationResult = parsedExpression.evaluate();
             result = String.valueOf(evaluationResult);
         } catch (Exception e) {
             result = "Błąd: " + e.getMessage();
