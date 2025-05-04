@@ -1,27 +1,30 @@
-// Funkcja obsługująca przyciski na ekranie
+// ======== KALKULATOR KLASYCZNY ========
+
+// Dodaje znak do pola wyrażenia
 function addDigit(char) {
     const input = document.getElementById('expression');
     input.value += char;
 }
 
-// Funkcja czyszcząca pole wejściowe
+// Czyści pole wejściowe
 function clearInput() {
     const input = document.getElementById('expression');
     input.value = '';
 }
 
-// Całość uruchamiana po załadowaniu strony
+// Obsługa zdarzeń po załadowaniu strony
 document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('expression');
 
-    // Obsługuje klawisze fizyczne
     document.addEventListener('keydown', (event) => {
+        const isMatrixField = event.target.closest('.matrix');  // Sprawdzamy, czy zdarzenie dotyczy pola macierzy
+
+        if (isMatrixField) return;  // Nie blokujemy wejść w polach macierzy
+
         const allowedKeys = '0123456789+-*/().%';
 
-        // Dozwolone znaki
         if (allowedKeys.includes(event.key)) {
             event.preventDefault();
-
             if (event.key === '.' && !input.value.includes('.')) {
                 input.value += event.key;
             } else if (event.key !== '.') {
@@ -29,32 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Zamiana przecinka na kropkę
         if (event.key === ',') {
             event.preventDefault();
             input.value += '.';
         }
 
-        // Enter = oblicz
         if (event.key === 'Enter') {
             event.preventDefault();
             document.querySelector('.calculator-form').submit();
         }
 
-        // Backspace = usuń ostatni znak
         if (event.key === 'Backspace') {
             event.preventDefault();
             input.value = input.value.slice(0, -1);
         }
 
-        // Escape = wyczyść
         if (event.key === 'Escape') {
             event.preventDefault();
             clearInput();
         }
     });
 
-    // Przycisk przejścia do kalkulatora naukowego
     const scientificBtn = document.getElementById('scientificCalcTab');
     if (scientificBtn) {
         scientificBtn.addEventListener('click', () => {
@@ -63,47 +61,107 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//MATRIX
-// Funkcja do generowania dynamicznej macierzy (A lub B)
+// ======== KALKULATOR MACIERZY ========
+
+// Generuje dynamiczną macierz A lub B
 function generateMatrix(id) {
-    // Pobieramy liczbę wierszy i kolumn z inputów
     const rows = document.getElementById(`rows${id}`).value;
     const cols = document.getElementById(`cols${id}`).value;
-
-    // Znajdujemy kontener, w którym będziemy wyświetlać macierz
     const container = document.getElementById(`matrix${id}Container`);
 
-    // Czyścimy kontener przed dodaniem nowej macierzy
     container.innerHTML = `<h4>Macierz ${id}</h4>`;
-
-    // Tworzymy tabelę, która będzie reprezentować macierz
     const table = document.createElement("table");
-    table.classList.add("matrix"); // Dodajemy klasę do stylizacji tabeli
+    table.classList.add("matrix");
 
-    // Pętla tworząca wiersze i kolumny w tabeli
     for (let i = 0; i < rows; i++) {
-        const tr = document.createElement("tr"); // Tworzymy wiersz
-
-        // Pętla tworząca komórki w każdym wierszu
+        const tr = document.createElement("tr");
         for (let j = 0; j < cols; j++) {
-            const td = document.createElement("td"); // Tworzymy komórkę
-            const input = document.createElement("input"); // Tworzymy input do wprowadzania danych
-            input.type = "number"; // Określamy, że input będzie typu liczba
-            input.name = `${id}[${i}][${j}]`; // Nadajemy unikalną nazwę dla każdego inputu w zależności od macierzy i pozycji
-
-            td.appendChild(input); // Dodajemy input do komórki
-            tr.appendChild(td); // Dodajemy komórkę do wiersza
+            const td = document.createElement("td");
+            const input = document.createElement("input");
+            input.type = "number";
+            input.name = `${id}[${i}][${j}]`;
+            input.value = 0;  // Domyślna wartość 0
+            input.setAttribute('inputmode', 'numeric');  // Umożliwia wprowadzanie liczb na urządzeniach mobilnych
+            td.appendChild(input);
+            tr.appendChild(td);
         }
-
-        table.appendChild(tr); // Dodajemy wiersz do tabeli
+        table.appendChild(tr);
     }
 
-    // Dodajemy tabelę z macierzą do kontenera
     container.appendChild(table);
 }
 
-// Funkcja obsługująca operacje na macierzach (do uzupełnienia przy backendzie)
+// Odczytuje dane macierzy z inputów
+// Odczytuje dane macierzy z inputów
+function readMatrixFromContainer(containerId) {
+    const container = document.getElementById(containerId);
+    const inputs = container.getElementsByTagName('input');
+
+    // Wyciągamy literę A lub B z ID kontenera
+    const id = containerId.includes("A") ? "A" : "B";
+
+    const rows = parseInt(document.getElementById(`rows${id}`).value);
+    const cols = parseInt(document.getElementById(`cols${id}`).value);
+
+    const matrix = [];
+
+    for (let i = 0; i < rows; i++) {
+        const row = [];
+        for (let j = 0; j < cols; j++) {
+            const inputName = `${id}[${i}][${j}]`;
+            const input = [...inputs].find(inp => inp.name === inputName);
+            // Odczytujemy wartość z pola input
+            row.push(parseFloat(input?.value) || 0);  // Domyślnie 0, jeśli wartość jest pusta
+        }
+        matrix.push(row);
+    }
+
+    return matrix;
+}
+
+// Wysyła dane do backendu i obsługuje wynik
 function performOperation(type) {
-    // Na razie wyświetlamy tylko nazwę operacji w kontenerze wyników
-    document.getElementById("resultContainer").innerText = `Wykonano operację: ${type}`;
+    const matrixA = readMatrixFromContainer('matrixAContainer');
+    const matrixB = readMatrixFromContainer('matrixBContainer');
+
+    fetch(`/api/matrix/${type}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ matrixA, matrixB })
+    })
+        .then(res => {
+            if (!res.ok) {
+                return res.text().then(text => { throw new Error(text); });
+            }
+            return res.json();
+        })
+        .then(result => {
+            renderMatrixResult(result);
+        })
+        .catch(error => {
+            document.getElementById("resultContainer").innerText = "Błąd: " + error.message;
+        });
+}
+
+// Wyświetla wynikową macierz w HTML
+function renderMatrixResult(result) {
+    const resultContainer = document.getElementById("resultContainer");
+    resultContainer.innerHTML = "<h4>Wynik:</h4>";
+
+    const table = document.createElement("table");
+    table.classList.add("matrix");
+
+    for (let i = 0; i < result.length; i++) {
+        const tr = document.createElement("tr");
+        for (let j = 0; j < result[i].length; j++) {
+            const td = document.createElement("td");
+            td.textContent = result[i][j].toFixed(2);
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+
+    resultContainer.appendChild(table);
 }

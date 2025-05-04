@@ -21,8 +21,8 @@
     <div class="matrix-dimensions">
         <div class="matrix-block">
             <h3>Macierz A:</h3>
-            <label>Wiersze: <input type="number" id="rowsA" min="1" value="2"></label>
-            <label>Kolumny: <input type="number" id="colsA" min="1" value="2"></label>
+            <label>Wiersze: <input type="number" id="rowsA" min="1" value="2" step="any" inputmode="numeric"></label>
+            <label>Kolumny: <input type="number" id="colsA" min="1" value="2" step="any" inputmode="numeric"></label>
             <button onclick="generateMatrix('A')">Generuj macierz A</button>
 
             <!-- Tutaj pojawi się macierz A -->
@@ -31,8 +31,8 @@
 
         <div class="matrix-block">
             <h3>Macierz B:</h3>
-            <label>Wiersze: <input type="number" id="rowsB" min="1" value="2"></label>
-            <label>Kolumny: <input type="number" id="colsB" min="1" value="2"></label>
+            <label>Wiersze: <input type="number" id="rowsB" min="1" value="2" step="any" inputmode="numeric"></label>
+            <label>Kolumny: <input type="number" id="colsB" min="1" value="2" step="any" inputmode="numeric"></label>
             <button onclick="generateMatrix('B')">Generuj macierz B</button>
 
             <!-- Tutaj pojawi się macierz B -->
@@ -42,7 +42,7 @@
 
     <!-- Przycisk operacji -->
     <div class="matrix-operations">
-        <button onclick="performOperation('add')">Dodaj</button>
+        <button type="button" onclick="performOperation('add')">Dodaj</button>
         <button onclick="performOperation('subtract')">Odejmij</button>
         <button onclick="performOperation('multiplyScalar')">Mnożenie przez liczbę</button>
         <button onclick="performOperation('multiplyMatrix')">Mnożenie macierzy</button>
@@ -53,7 +53,6 @@
     </div>
 
     <div class="result">
-        <h3>Wynik:</h3>
         <div id="resultContainer"></div>
     </div>
 </div>
