@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>SmartCalc</title>
-    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/matrix.css}">
 </head>
 <body>
 <div class="header">
@@ -18,7 +18,45 @@
 </div>
 
 <div class="content">
-    <h2 th:text="${message}">Wczytywanie...</h2>
+    <div class="matrix-dimensions">
+        <div class="matrix-block">
+            <h3>Macierz A:</h3>
+            <label>Wiersze: <input type="number" id="rowsA" min="1" value="2"></label>
+            <label>Kolumny: <input type="number" id="colsA" min="1" value="2"></label>
+            <button onclick="generateMatrix('A')">Generuj macierz A</button>
+
+            <!-- Tutaj pojawi się macierz A -->
+            <div id="matrixAContainer" class="matrix"></div>
+        </div>
+
+        <div class="matrix-block">
+            <h3>Macierz B:</h3>
+            <label>Wiersze: <input type="number" id="rowsB" min="1" value="2"></label>
+            <label>Kolumny: <input type="number" id="colsB" min="1" value="2"></label>
+            <button onclick="generateMatrix('B')">Generuj macierz B</button>
+
+            <!-- Tutaj pojawi się macierz B -->
+            <div id="matrixBContainer" class="matrix"></div>
+        </div>
+    </div>
+
+    <!-- Przycisk operacji -->
+    <div class="matrix-operations">
+        <button onclick="performOperation('add')">Dodaj</button>
+        <button onclick="performOperation('subtract')">Odejmij</button>
+        <button onclick="performOperation('multiplyScalar')">Mnożenie przez liczbę</button>
+        <button onclick="performOperation('multiplyMatrix')">Mnożenie macierzy</button>
+        <button onclick="performOperation('power')">Potęguj</button>
+        <button onclick="performOperation('transpose')">Transponuj</button>
+        <button onclick="performOperation('inverse')">Macierz odwrotna</button>
+        <button onclick="performOperation('rank')">Rząd macierzy</button>
+    </div>
+
+    <div class="result">
+        <h3>Wynik:</h3>
+        <div id="resultContainer"></div>
+    </div>
 </div>
+<script src="/scripts.js"></script>
 </body>
 </html>
