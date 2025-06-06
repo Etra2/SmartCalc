@@ -1,0 +1,198 @@
+/* Reset i ogólne ustawienia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Nagłówek i zakładki (przyciski górne) */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #006666;
+    margin-bottom: 10px;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    background-color: #006666;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tab:hover,
+.tab.active {
+    background-color: #004d4d;
+}
+
+/* Główna sekcja macierzy */
+.matrix-dimensions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 40px;
+}
+
+/* Blok pojedynczej macierzy */
+.matrix-block {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* wyśrodkowanie zawartości */
+    gap: 10px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* Sekcja z wyborem rozmiaru i generowaniem */
+.matrix-block label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.matrix-block input[type="number"] {
+    width: 60px;
+    padding: 6px 8px;
+    font-size: 16px;
+}
+
+.matrix-block button {
+    margin-top: 8px;
+    background-color: #006666;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.matrix-block button:hover {
+    background-color: #004d4d;
+}
+
+/* Styl tabeli z macierzą */
+.matrix table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.matrix td {
+    padding: 4px;
+}
+
+.matrix input {
+    width: 60px;
+    height: 40px;
+    padding: 6px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Sekcja przycisków operacji */
+.matrix-operations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
+
+.matrix-operations button {
+    background-color: #006666;
+    color: white;
+    padding: 10px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.matrix-operations button:hover {
+    background-color: #004d4d;
+}
+
+/* Wynik operacji */
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border: 2px solid #006666;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px;
+}
+
+.result h3 {
+    margin-bottom: 15px;
+    color: #006666;
+}
+
+#resultContainer {
+    font-size: 16px;
+    font-weight: bold;
+    color: #006666;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .matrix-dimensions {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .matrix-block {
+        width: 100%;
+    }
+}
+
+.scalar-input {
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.scalar-input input {
+    padding: 5px;
+    width: 150px;
+}

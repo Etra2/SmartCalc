@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartCalc</title>
+    <link rel="stylesheet" th:href="@{/AI.css}">
+</head>
+<body>
+<div class="header">
+    <h1>SmartCalc</h1>
+    <div class="tabs">
+        <a th:href="@{/classic}"><button class="tab" th:classappend="${activeTab == 'classic' ? ' active' : ''}">Kalkulator klasyczny</button></a>
+        <a th:href="@{/scientific}"><button class="tab" th:classappend="${activeTab == 'scientific' ? ' active' : ''}">Kalkulator naukowy</button></a>
+        <a th:href="@{/matrix}"><button class="tab" th:classappend="${activeTab == 'matrix' ? ' active' : ''}">Kalkulator macierzy</button></a>
+        <a th:href="@{/logic}"><button class="tab" th:classappend="${activeTab == 'logic' ? ' active' : ''}">Kalkulator logiki</button></a>
+        <a th:href="@{/ai}"><button class="tab" th:classappend="${activeTab == 'ai' ? ' active' : ''}">Rozwiąż zadanie z AI</button></a>
+    </div>
+</div>
+
+<div class="content">
+    <h2>Rozwiąż zadanie z AI</h2>
+
+    <form id="ai-form">
+        <label for="task-input">Treść zadania:</label><br>
+        <textarea id="task-input" name="task" placeholder="Wpisz treść zadania..." required></textarea><br>
+
+        <label for="option-select">Wybierz opcję:</label><br>
+        <select id="option-select" name="option" required>
+            <option value="wzory">Podaj wzory</option>
+            <option value="wynik">Podaj tylko wynik</option>
+            <option value="rozwiazanie">Podaj rozwiązanie zadania</option>
+        </select><br>
+
+        <button type="submit">Rozwiąż zadanie z AI</button>
+    </form>
+
+    <div id="ai-result"></div>
+</div>
+
+<script src="/scripts.js"></script>
+<script src="/AI.js"></script>
+</body>
+</html>
+

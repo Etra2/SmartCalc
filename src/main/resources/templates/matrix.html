@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartCalc</title>
+    <link rel="stylesheet" th:href="@{/matrix.css}">
+</head>
+<body>
+<div class="header">
+    <h1>SmartCalc</h1>
+    <div class="tabs">
+        <a th:href="@{/classic}"><button class="tab" th:classappend="${activeTab == 'classic' ? ' active' : ''}">Kalkulator klasyczny</button></a>
+        <a th:href="@{/scientific}"><button class="tab" th:classappend="${activeTab == 'scientific' ? ' active' : ''}">Kalkulator naukowy</button></a>
+        <a th:href="@{/matrix}"><button class="tab" th:classappend="${activeTab == 'matrix' ? ' active' : ''}">Kalkulator macierzy</button></a>
+        <a th:href="@{/logic}"><button class="tab" th:classappend="${activeTab == 'logic' ? ' active' : ''}">Kalkulator logiki</button></a>
+        <a th:href="@{/ai}"><button class="tab" th:classappend="${activeTab == 'ai' ? ' active' : ''}">Rozwiąż zadanie z AI</button></a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="matrix-dimensions">
+        <div class="matrix-block">
+            <h3>Macierz A:</h3>
+            <label>Wiersze: <input type="number" id="rowsA" min="1" value="2" step="any" inputmode="numeric"></label>
+            <label>Kolumny: <input type="number" id="colsA" min="1" value="2" step="any" inputmode="numeric"></label>
+            <button onclick="generateMatrix('A')">Generuj macierz A</button>
+
+            <!-- Tutaj pojawi się macierz A -->
+            <div id="matrixAContainer" class="matrix"></div>
+        </div>
+
+        <div class="matrix-block">
+            <h3>Macierz B:</h3>
+            <label>Wiersze: <input type="number" id="rowsB" min="1" value="2" step="any" inputmode="numeric"></label>
+            <label>Kolumny: <input type="number" id="colsB" min="1" value="2" step="any" inputmode="numeric"></label>
+            <button onclick="generateMatrix('B')">Generuj macierz B</button>
+
+            <!-- Tutaj pojawi się macierz B -->
+            <div id="matrixBContainer" class="matrix"></div>
+        </div>
+    </div>
+
+    <!-- Pole liczby do operacji (skalar/potęga) -->
+    <div class="scalar-input">
+        <label for="numberInput">Podaj liczbę (skalar / wykładnik):</label>
+        <input type="number" id="numberInput" step="any" placeholder="Np. 2, 0.5, -3">
+    </div>
+
+    <!-- Przycisk operacji -->
+    <div class="matrix-operations">
+        <button type="button" onclick="performOperation('add')">Dodaj</button>
+        <button onclick="performOperation('subtract')">Odejmij</button>
+        <button onclick="performOperation('multiplyScalar')">Mnożenie przez liczbę</button>
+        <button onclick="performOperation('multiplyMatrix')">Mnożenie macierzy</button>
+        <button onclick="performOperation('power')">Potęguj</button>
+        <button onclick="performOperation('transpose')">Transponuj</button>
+        <button onclick="performOperation('inverse')">Macierz odwrotna</button>
+        <button onclick="performOperation('rank')">Rząd macierzy</button>
+    </div>
+
+    <div class="result">
+        <div id="resultContainer"></div>
+    </div>
+</div>
+<script src="/scripts.js"></script>
+</body>
+</html>

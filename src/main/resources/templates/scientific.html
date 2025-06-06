@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartCalc – Kalkulator Naukowy</title>
+    <link rel="stylesheet" th:href="@{/scientific.css}">
+</head>
+<body>
+<div class="header">
+    <h1>SmartCalc</h1>
+    <div class="tabs">
+        <a th:href="@{/classic}"><button class="tab">Kalkulator klasyczny</button></a>
+        <a th:href="@{/scientific}"><button class="tab active">Kalkulator naukowy</button></a>
+        <a th:href="@{/matrix}"><button class="tab">Kalkulator macierzy</button></a>
+        <a th:href="@{/logic}"><button class="tab">Kalkulator logiki</button></a>
+        <a th:href="@{/ai}"><button class="tab">Rozwiąż zadanie z AI</button></a>
+    </div>
+</div>
+
+<div class="calculator-container">
+    <form th:action="@{/scientific/calculate}" method="post" class="calculator-form">
+        <div class="input-group">
+            <input type="text" th:name="expression" id="expression" placeholder="Wpisz wyrażenie" th:value="${expression}" required />
+        </div>
+
+        <div class="buttons-group">
+            <button type="button" onclick="addDigit('sqrt(')">sqrt</button>
+            <button type="button" onclick="addDigit('rad(')">rad</button>
+            <button type="button" onclick="addDigit('silnia(')">silnia</button>
+            <button type="button" onclick="addDigit('(')">(</button>
+            <button type="button" onclick="addDigit(')')">)</button>
+            <button type="button" onclick="addDigit('%')">%</button>
+            <button type="button" onclick="addDigit('/')">/</button>
+
+            <button type="button" onclick="addDigit('sin(')">sin</button>
+            <button type="button" onclick="addDigit('cos(')">cos</button>
+            <button type="button" onclick="addDigit('tan(')">tan</button>
+            <button type="button" onclick="addDigit('7')">7</button>
+            <button type="button" onclick="addDigit('8')">8</button>
+            <button type="button" onclick="addDigit('9')">9</button>
+            <button type="button" onclick="addDigit('*')">*</button>
+
+            <button type="button" onclick="addDigit('ln(')">ln</button>
+            <button type="button" onclick="addDigit('log(')">log</button>
+            <button type="button" onclick="addDigit('1/(')">1/x</button>
+            <button type="button" onclick="addDigit('4')">4</button>
+            <button type="button" onclick="addDigit('5')">5</button>
+            <button type="button" onclick="addDigit('6')">6</button>
+            <button type="button" onclick="addDigit('-')">-</button>
+
+            <button type="button" onclick="addDigit('root(')">√(x,y)</button>
+            <button type="button" onclick="addDigit('^2')">x²</button>
+            <button type="button" onclick="addDigit('^')">xʸ</button>
+            <button type="button" onclick="addDigit('1')">1</button>
+            <button type="button" onclick="addDigit('2')">2</button>
+            <button type="button" onclick="addDigit('3')">3</button>
+            <button type="button" onclick="addDigit('+')">+</button>
+
+            <button type="button" onclick="addDigit('abs(')">|x|</button>
+            <button type="button" onclick="addDigit('pi')">π</button>
+            <button type="button" onclick="addDigit('e')">e</button>
+            <button type="button" onclick="addDigit('-')">+/-</button>
+            <button type="button" onclick="addDigit('0')">0</button>
+            <button type="button" onclick="addDigit('.')">.</button>
+            <button type="button" onclick="clearInput()">C</button>
+        </div>
+
+        <div class="buttons-row">
+            <button type="submit" id="calculate-btn">=</button>
+        </div>
+    </form>
+
+    <div class="result">
+        <p>Wynik: <span th:text="${result}">0</span></p>
+    </div>
+</div>
+
+<script src="/scripts.js"></script>
+</body>
+</html>

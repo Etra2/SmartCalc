@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCalc</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<!-- Główna sekcja nagłówka i zakładek -->
+<div class="header">
+    <h1>SmartCalc</h1>
+    <div class="tabs">
+        <a th:href="@{/classic}">
+            <button class="tab" th:classappend="${activeTab == 'classic' ? ' active' : ''}" id="classicCalcTab">Kalkulator klasyczny</button>
+        </a>
+        <a th:href="@{/scientific}">
+            <button class="tab" th:classappend="${activeTab == 'scientific' ? ' active' : ''}" id="scientificCalcTab">Kalkulator naukowy</button>
+        </a>
+        <a th:href="@{/matrix}">
+            <button class="tab" th:classappend="${activeTab == 'matrix' ? ' active' : ''}" id="matrixCalcTab">Kalkulator macierzy</button>
+        </a>
+        <a th:href="@{/logic}">
+            <button class="tab" th:classappend="${activeTab == 'logic' ? ' active' : ''}" id="logicCalcTab">Kalkulator logiki</button>
+        </a>
+        <a th:href="@{/ai}">
+            <button class="tab" th:classappend="${activeTab == 'ai' ? ' active' : ''}" id="solveMathProblemAI">Rozwiąż zadanie z AI</button>
+        </a>
+    </div>
+</div>
+
+<div class="calculator-container">
+    <!-- Formularz kalkulatora -->
+    <form th:action="@{/classic/calculate}" method="post" class="calculator-form">
+        <div class="input-group">
+            <!-- Pole do wprowadzania wyrażenia -->
+            <input type="text" th:name="expression" id="expression" placeholder="Wpisz wyrażenie" th:value="${expression}" required />
+        </div>
+
+        <div class="buttons-group">
+            <!-- Przyciski kalkulatora -->
+            <button type="button" onclick="addDigit('%')">%</button>
+            <button type="button" onclick="addDigit('(')">(</button>
+            <button type="button" onclick="addDigit(')')">)</button>
+            <button type="button" onclick="clearInput()">C</button>
+
+            <button type="button" onclick="addDigit('7')">7</button>
+            <button type="button" onclick="addDigit('8')">8</button>
+            <button type="button" onclick="addDigit('9')">9</button>
+            <button type="button" onclick="addDigit('/')">/</button>
+
+            <button type="button" onclick="addDigit('4')">4</button>
+            <button type="button" onclick="addDigit('5')">5</button>
+            <button type="button" onclick="addDigit('6')">6</button>
+            <button type="button" onclick="addDigit('*')">*</button>
+
+            <button type="button" onclick="addDigit('1')">1</button>
+            <button type="button" onclick="addDigit('2')">2</button>
+            <button type="button" onclick="addDigit('3')">3</button>
+            <button type="button" onclick="addDigit('-')">-</button>
+
+            <button type="button" onclick="addDigit('0')">0</button>
+            <button type="button" onclick="addDigit('.')">.</button>
+            <button type="button" onclick="addDigit('+')">+</button>
+
+            <button type="submit">=</button>
+        </div>
+    </form>
+
+    <!-- Wynik obliczeń -->
+    <div class="result">
+        <p>Wynik: <span th:text="${result}">0</span></p>
+    </div>
+</div>
+
+<script src="/scripts.js"></script>
+</body>
+</html>

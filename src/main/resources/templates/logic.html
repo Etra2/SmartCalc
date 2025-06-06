@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartCalc</title>
+    <link rel="stylesheet" th:href="@{/logic.css}">
+</head>
+<body>
+<div class="header">
+    <h1>SmartCalc</h1>
+    <div class="tabs">
+        <a th:href="@{/classic}"><button class="tab" th:classappend="${activeTab == 'classic' ? ' active' : ''}">Kalkulator klasyczny</button></a>
+        <a th:href="@{/scientific}"><button class="tab" th:classappend="${activeTab == 'scientific' ? ' active' : ''}">Kalkulator naukowy</button></a>
+        <a th:href="@{/matrix}"><button class="tab" th:classappend="${activeTab == 'matrix' ? ' active' : ''}">Kalkulator macierzy</button></a>
+        <a th:href="@{/logic}"><button class="tab" th:classappend="${activeTab == 'logic' ? ' active' : ''}">Kalkulator logiki</button></a>
+        <a th:href="@{/ai}"><button class="tab" th:classappend="${activeTab == 'ai' ? ' active' : ''}">Rozwiąż zadanie z AI</button></a>
+    </div>
+</div>
+
+<div class="content">
+    <h2>Kalkulator logiki matematycznej</h2>
+    <form id="logic-form" method="post" th:action="@{/logic}">
+        <label for="expression">Wyrażenie logiczne (np. r∧s, r∧s∨t):</label><br>
+        <input
+                type="text"
+                id="expression"
+                name="expression"
+                required
+                autocomplete="off"
+                placeholder="Wpisz wyrażenie logiczne"
+        >
+        <button type="submit">Oblicz</button>
+
+        <!-- Przyciski Operacje -->
+        <div class="button-row operations">
+            <strong>Operacje:</strong><br>
+            <button type="button" onclick="insertToExpression('∧')">∧</button>
+            <button type="button" onclick="insertToExpression('∨')">∨</button>
+            <button type="button" onclick="insertToExpression('→')">→</button>
+            <button type="button" onclick="insertToExpression('↔')">↔</button>
+            <button type="button" onclick="insertToExpression('¬')">¬</button>
+            <button type="button" onclick="insertToExpression('(')">(</button>
+            <button type="button" onclick="insertToExpression(')')">)</button>
+            <button type="button" onclick="insertToExpression('1')">prawda</button>
+            <button type="button" onclick="insertToExpression('0')">fałsz</button>
+        </div>
+
+        <!-- Przyciski Zmienne -->
+        <div class="button-row variables">
+            <strong>Zmienne:</strong><br>
+            <button type="button" onclick="insertToExpression('P')">P</button>
+            <button type="button" onclick="insertToExpression('Q')">Q</button>
+            <button type="button" onclick="insertToExpression('R')">R</button>
+            <button type="button" onclick="insertToExpression('S')">S</button>
+            <button type="button" onclick="insertToExpression('T')">T</button>
+            <button type="button" onclick="insertToExpression('U')">U</button>
+            <button type="button" onclick="insertToExpression('W')">W</button>
+        </div>
+    </form>
+
+    <div id="logic-table">
+        <h3>Wynik:</h3>
+        <table>
+            <thead>
+            <tr id="header-row">
+                <!-- nagłówki zmiennych dynamicznie -->
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            <!-- wiersze wyników dynamicznie -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="/scripts.js"></script>
+</body>
+</html>

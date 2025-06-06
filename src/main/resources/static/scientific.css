@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Nagłówek i zakładki */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #006666;
+    margin-bottom: 10px;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    background-color: #006666;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tab:hover,
+.tab.active {
+    background-color: #004d4d;
+}
+
+/* Kalkulator naukowy */
+.calculator-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.input-group {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 20px auto;
+}
+
+#expression {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Przyciski kalkulatora naukowego */
+.buttons-group {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 kolumn */
+    gap: 10px;
+}
+
+.buttons-group button {
+    background-color: #006666;
+    color: white;
+    padding: 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons-group button:hover {
+    background-color: #004d4d;
+}
+
+/* Wynik */
+.result {
+    margin-top: 20px;
+    background-color: #fff;
+    border: 2px solid #006666;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.result span {
+    font-weight: bold;
+}
+
+#calculate-btn {
+    background-color: #006666;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#calculate-btn:hover {
+    background-color: #004d4d;
+}

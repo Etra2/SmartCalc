@@ -1,0 +1,139 @@
+/* Reset i podstawowe ustawienia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Nagłówek i zakładki */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #006666;
+    margin-bottom: 10px;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    background-color: #006666;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tab:hover,
+.tab.active {
+    background-color: #004d4d;
+}
+
+/* Kontener formularza AI */
+.content {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 700px;
+    color: #006666;
+}
+
+#ai-form label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+    color: #004d4d;
+}
+
+#ai-form textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #006666;
+    border-radius: 8px;
+    resize: vertical;
+    margin-bottom: 15px;
+}
+
+#ai-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #006666;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #f4f4f4;
+    color: #004d4d;
+}
+
+#ai-form button {
+    background-color: #006666;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+#ai-form button:hover {
+    background-color: #004d4d;
+}
+
+#ai-result {
+    margin-top: 25px;
+    background-color: #e6f7f7;
+    border: 2px solid #006666;
+    border-radius: 10px;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-size: 16px;
+    color: #004d4d;
+    min-height: 80px;
+}
+
+/* Responsywność */
+@media (max-width: 600px) {
+    #ai-form textarea,
+    #ai-form select {
+        font-size: 14px;
+    }
+
+    #ai-form button {
+        width: 100%;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #ai-result {
+        font-size: 14px;
+        padding: 15px;
+    }
+}
